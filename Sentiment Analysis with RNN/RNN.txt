@@ -1,0 +1,62 @@
+Sentiment Analysis By RNN
+
+1. Import Libraries:
+   - It imports necessary libraries such as pandas for data manipulation, re for regular expressions, numpy for numerical operations, scikit-learn for label encoding and splitting data, and TensorFlow and Keras for building and training a deep learning model.
+
+2. Load Data:
+   - The code attempts to read a CSV file named 'Data.csv' using different character encodings (utf-8, latin-1, iso-8859-1, cp1252) until it successfully loads the data into a pandas DataFrame named `df`.
+
+3. Data Preprocessing:
+   - It specifies the column containing text data as `message_column` and ensures that all elements in that column are converted to strings.
+
+   - It performs text preprocessing by converting text to lowercase and removing special characters using regular expressions.
+
+4. Label Encoding:
+   - It initializes a label encoder and encodes the 'sentiment' column in the DataFrame, which likely contains the target labels (positive, negative, neutral), into numerical values.
+
+5. Tokenization and Padding:
+   - Tokenization is performed using Keras' `Tokenizer` class, which converts text into sequences of integers.
+
+   - The sequences are then padded to a fixed length of 100 using `pad_sequences`. 
+	-This step ensures that all input sequences have the same length, which is required for training a neural network.
+
+6. Data Splitting:
+   - The data is split into training and testing sets using `train_test_split`. 80% of the data is used for training, and 20% is used for testing.
+
+7. *Model Building*:
+   - A deep learning model is constructed using Keras' `Sequential` API.
+
+   - It includes an embedding layer, which learns word embeddings from the input data.
+
+   - Two LSTM (Long Short-Term Memory) layers are added for sequence modeling. The first LSTM layer returns sequences, and the second one doesn't, effectively capturing sequential patterns.
+
+   - A dense layer with 3 units (for the 3 sentiment classes) and softmax activation is added for classification.
+
+8. Model Compilation:
+   - The model is compiled with 'adam' optimizer, 'sparse_categorical_crossentropy' as the loss function (suitable for integer-encoded labels), and accuracy as a metric.
+
+9. Early Stopping:
+   - Early stopping is implemented to prevent overfitting. It monitors the validation loss and restores the best weights when validation loss doesn't improve for a certain number of epochs (patience=3 in this case).
+
+10. Model Training:
+    - The model is trained on the training data for 20 epochs with a batch size of 128. A portion of the training data (20%) is used for validation.
+
+11. *Model Evaluation*:
+    - The model is evaluated on the test set, and the loss and accuracy are printed.
+	Loss: 0.44878119230270386
+	Accuracy: 0.8373658657073975
+12. Classification Report:
+    - Using scikit-learn's `classification_report`, predictions are made on the test set, and a classification report is generated. This report includes metrics like precision, recall, and F1-score for each class (sentiment category).
+	Classification Report:
+              precision    recall  f1-score   support
+
+    negative       0.82      0.78      0.80      1562
+     neutral       0.80      0.90      0.85      2230
+    positive       0.92      0.81      0.86      1705
+
+    accuracy                           0.84      5497
+   macro avg       0.85      0.83      0.84      5497
+weighted avg       0.84      0.84      0.84      5497
+
+You can run this script with your own 'Data.csv' file to perform sentiment analysis and generate a detailed classification report for your dataset. 
+The classification report will provide insights into how well the model performs for each sentiment category.

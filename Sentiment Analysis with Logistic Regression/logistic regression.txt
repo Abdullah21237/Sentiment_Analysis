@@ -1,0 +1,56 @@
+Sentiment Analysis with Logistic Regression and TF-IDF Vectorization
+
+Introduction
+This code is designed to perform sentiment analysis on a dataset using a Logistic Regression model in Python. 
+The sentiment analysis task involves classifying text messages into different sentiment categories (e.g., positive, negative, neutral). 
+The code utilizes the scikit-learn library for machine learning and pandas for data manipulation.
+
+1. Data Loading and Encoding
+The first section of the code is responsible for loading the dataset from a CSV file with different character encodings to ensure successful data reading. 
+It iterates through a list of encodings (utf-8, latin-1, iso-8859-1, cp1252) and attempts to read the CSV file with each encoding until it succeeds.
+
+2. Data Preprocessing
+The second section of the code is dedicated to preprocessing the text data. 
+It prepares the text messages for feature extraction by lowercasing the text and removing special characters using regular expressions.
+
+3. Target Variable Encoding
+In this section, the code encodes the target variable (sentiment) using the `LabelEncoder` from scikit-learn. 
+It assigns numeric labels to each sentiment category, making it suitable for machine learning.
+
+4. TF-IDF Vectorization
+The next step is to convert the text data into numerical features using TF-IDF (Term Frequency-Inverse Document Frequency) vectorization. 
+The code uses the `TfidfVectorizer` from scikit-learn to transform the text messages into a TF-IDF matrix. 
+This matrix represents the importance of words in each message relative to the entire dataset.
+
+5. Data Splitting
+The code splits the dataset into training and testing sets using `train_test_split` from scikit-learn. 
+It separates the features (X) and the target variable (y) into training and testing subsets.
+
+6. Logistic Regression Model
+In this section, a Logistic Regression model is created and trained using the training data. 
+The Logistic Regression model is a simple yet effective algorithm for binary and multi-class classification tasks.
+
+7. Model Evaluation
+The final section evaluates the performance of the Logistic Regression model on the testing data. 
+It calculates the accuracy of the model and generates a classification report, which includes precision, recall, F1-score, and support for each sentiment class.
+Accuracy: 0.8197198471893761
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.77      0.80      0.79      1562
+           1       0.81      0.87      0.84      2230
+           2       0.89      0.77      0.82      1705
+
+    accuracy                           0.82      5497
+   macro avg       0.82      0.81      0.82      5497
+weighted avg       0.82      0.82      0.82      5497
+0 = Negative
+1 = Neutral
+2 = Positive
+
+Conclusion
+This code successfully performs sentiment analysis on a given dataset using a Logistic Regression model. 
+It covers data loading, preprocessing, feature extraction (TF-IDF), model training, and evaluation. 
+The accuracy and classification report provide insights into the model's performance. 
+Depending on the task requirements, you can further fine-tune the model or explore other machine learning algorithms for sentiment analysis.

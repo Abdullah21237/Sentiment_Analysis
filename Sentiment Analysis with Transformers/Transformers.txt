@@ -1,0 +1,82 @@
+Title: Sentiment Analysis with DistilBERT Using PyTorch and Transformers
+
+Introduction:
+
+This code demonstrates the process of performing sentiment analysis using the DistilBERT model with PyTorch and the Hugging Face Transformers library. 
+Sentiment analysis involves classifying text data into predefined sentiment categories, such as positive, negative, or neutral. 
+The code includes data loading, preprocessing, model training, evaluation, and reporting.
+
+Libraries Used:
+
+- `pandas`: Used for data manipulation and storage.
+- `numpy`: Provides support for numerical operations.
+- `sklearn.model_selection`: Utilized for splitting the dataset into training and testing sets.
+- `transformers`: Used for loading pre-trained DistilBERT model and tokenizer.
+- `torch`: The PyTorch library for deep learning.
+- `torch.utils.data`: Helps in creating custom datasets and dataloaders.
+- `sklearn.metrics`: Used for generating a classification report.
+
+Data Loading:
+
+The code first attempts to read data from a CSV file with various encoding options (`utf-8`, `latin-1`, `iso-8859-1`, `cp1252`) to handle potential Unicode decoding errors. 
+Once successfully decoded, the data is loaded into a pandas DataFrame called `df`.
+
+Data Preprocessing:
+
+1. The column containing text data (`selected_text`) is specified.
+2. Non-string elements in the selected column are converted to strings.
+3. The dataset is split into training and testing sets using the `train_test_split` function from `sklearn.model_selection`.
+
+Model Setup:
+
+The DistilBERT model and tokenizer are initialized using Hugging Face Transformers. 
+The model is configured for sequence classification with a number of labels equal to the unique sentiments in the dataset.
+
+Tokenization:
+
+The text data is tokenized using the DistilBERT tokenizer. 
+Tokenization involves breaking the text into smaller units (tokens) and padding/truncating to ensure a consistent input length. 
+Tokenized data is converted into PyTorch tensors.
+
+Label Encoding:
+
+Sentiment labels are mapped to numeric values using a label map, which assigns a unique numeric value to each sentiment category.
+
+Data Loaders:
+
+PyTorch `DataLoader` objects are created for both the training and testing datasets. Data is loaded in batches to facilitate model training and evaluation.
+
+Model Training:
+
+The code trains the DistilBERT model for a specified number of epochs. 
+In each epoch, the training data is processed in batches. 
+The model's parameters are updated using the AdamW optimizer, and the loss is calculated. 
+The loss is printed at the end of each epoch.
+
+Model Evaluation:
+
+After training, the model is put in evaluation mode. 
+Predictions are made on the test data, and the true labels are collected. 
+The code generates a classification report, which includes metrics such as precision, recall, F1-score, and support for each sentiment class.
+
+Classification Report:
+
+The classification report provides a detailed summary of the model's performance on the test data. 
+It includes metrics for each sentiment class, such as precision, recall, F1-score, and support. 
+These metrics help assess how well the model is performing in classifying sentiments.
+Classification Report:
+              precision    recall  f1-score   support
+
+    positive       1.00      1.00      1.00        33
+    negative       0.96      0.80      0.87        30
+     neutral       0.90      0.98      0.94        54
+
+    accuracy                           0.94       117
+   macro avg       0.95      0.93      0.94       117
+weighted avg       0.94      0.94      0.94       117
+
+Conclusion:
+
+This code demonstrates how to perform sentiment analysis using the DistilBERT model with PyTorch and Transformers. 
+It covers data loading, preprocessing, model setup, training, evaluation, and reporting, making it a comprehensive example for sentiment analysis tasks. 
+Adjustments can be made to hyperparameters and model architecture as needed for specific applications.
